@@ -33,7 +33,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <a
               href="mailto:thecrosswalkmentors@gmail.com"
-              className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:bg-brand-gold hover:text-white transition-colors duration-300"
+              className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:bg-brand-gold hover:text-white hover:scale-110 hover:-translate-y-0.5 transition-all duration-300"
               aria-label="Email"
             >
               <FaEnvelope size={16} />
@@ -42,14 +42,14 @@ export default function Footer() {
               href="https://instagram.com/thecross_walk"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:bg-brand-gold hover:text-white transition-colors duration-300"
+              className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:bg-brand-gold hover:text-white hover:scale-110 hover:-translate-y-0.5 transition-all duration-300"
               aria-label="Instagram"
             >
               <FaInstagram size={16} />
             </a>
             <a
               href="tel:+19515328010"
-              className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:bg-brand-gold hover:text-white transition-colors duration-300"
+              className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:bg-brand-gold hover:text-white hover:scale-110 hover:-translate-y-0.5 transition-all duration-300"
               aria-label="Phone"
             >
               <FaPhone size={16} />

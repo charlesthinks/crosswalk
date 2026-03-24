@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import Image from "next/image";
+import { motion, AnimatePresence } from "motion/react";
 import { BASE_PATH } from "@/lib/config";
 
 const navLinks = [
@@ -67,41 +68,50 @@ export default function Navbar() {
           </div>
 
           {/* Mobile hamburger */}
-          <button
+          <motion.button
             onClick={() => setMenuOpen(!menuOpen)}
             className={`md:hidden transition-colors duration-300 ${scrolled ? "text-brand-navy" : "text-white"
               }`}
             aria-label="Toggle menu"
+            whileTap={{ scale: 0.9 }}
           >
             {menuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
-          </button>
+          </motion.button>
         </div>
       </div>
 
       {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-white shadow-lg">
-          <div className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="md:hidden bg-white shadow-lg overflow-hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
+            <div className="px-4 py-4 space-y-3">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="block text-brand-navy font-medium text-base py-2 hover:text-brand-gold transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
               <a
-                key={link.href}
-                href={link.href}
+                href="#contact"
                 onClick={() => setMenuOpen(false)}
-                className="block text-brand-navy font-medium text-base py-2 hover:text-brand-gold transition-colors"
+                className="block text-center bg-brand-gold hover:bg-brand-gold-light text-white font-semibold px-5 py-2.5 rounded-full transition-colors"
               >
-                {link.label}
+                Get Started
               </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={() => setMenuOpen(false)}
-              className="block text-center bg-brand-gold hover:bg-brand-gold-light text-white font-semibold px-5 py-2.5 rounded-full transition-colors"
-            >
-              Get Started
-            </a>
-          </div>
-        </div>
-      )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

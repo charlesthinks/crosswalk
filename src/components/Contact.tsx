@@ -2,8 +2,14 @@
 
 import { useState } from "react";
 import { FaEnvelope, FaPhone, FaInstagram } from "react-icons/fa";
+import { motion, AnimatePresence } from "motion/react";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export default function Contact() {
   const [status, setStatus] = useState<FormStatus>("idle");
@@ -79,19 +85,32 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 md:py-28 bg-brand-cream">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <p className="font-body text-brand-gold text-sm font-semibold uppercase tracking-[0.25em] mb-4">
             Take the First Step
           </p>
           <h2 className="font-heading text-3xl sm:text-4xl font-bold text-brand-navy">
             Start Your Journey
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
+          <motion.form
+            onSubmit={handleSubmit}
+            className="space-y-5"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ staggerChildren: 0.08 }}
+          >
+            <motion.div variants={fadeInUp} transition={{ duration: 0.4, ease: "easeOut" }}>
               <label htmlFor="name" className="block font-body text-sm font-medium text-brand-navy mb-1.5">
                 Full Name
               </label>
@@ -100,12 +119,12 @@ export default function Contact() {
                 id="name"
                 name="name"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-colors"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px"
                 placeholder="Your name"
               />
-            </div>
+            </motion.div>
 
-            <div>
+            <motion.div variants={fadeInUp} transition={{ duration: 0.4, ease: "easeOut" }}>
               <label htmlFor="email" className="block font-body text-sm font-medium text-brand-navy mb-1.5">
                 Email Address
               </label>
@@ -114,12 +133,12 @@ export default function Contact() {
                 id="email"
                 name="email"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-colors"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px"
                 placeholder="you@example.com"
               />
-            </div>
+            </motion.div>
 
-            <div>
+            <motion.div variants={fadeInUp} transition={{ duration: 0.4, ease: "easeOut" }}>
               <label htmlFor="phone" className="block font-body text-sm font-medium text-brand-navy mb-1.5">
                 Phone <span className="text-brand-slate/50">(optional)</span>
               </label>
@@ -127,12 +146,12 @@ export default function Contact() {
                 type="tel"
                 id="Phone"
                 name="Phone"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-colors"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px"
                 placeholder="(555) 123-4567"
               />
-            </div>
+            </motion.div>
 
-            <div>
+            <motion.div variants={fadeInUp} transition={{ duration: 0.4, ease: "easeOut" }}>
               <label htmlFor="message" className="block font-body text-sm font-medium text-brand-navy mb-1.5">
                 Message
               </label>
@@ -141,34 +160,58 @@ export default function Contact() {
                 name="message"
                 rows={4}
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-colors resize-none"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px resize-none"
                 placeholder="Tell us about yourself and what you're looking for..."
               />
-            </div>
+            </motion.div>
 
-            <button
-              type="submit"
-              disabled={status === "submitting"}
-              className="w-full bg-brand-gold hover:bg-brand-gold-light disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3.5 rounded-full text-base transition-colors duration-300"
-            >
-              {status === "submitting" ? "Sending..." : "Send Message"}
-            </button>
+            <motion.div variants={fadeInUp} transition={{ duration: 0.4, ease: "easeOut" }}>
+              <button
+                type="submit"
+                disabled={status === "submitting"}
+                className="w-full bg-brand-gold hover:bg-brand-gold-light disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3.5 rounded-full text-base transition-all duration-300 hover:shadow-[0_0_20px_rgba(200,151,62,0.3)]"
+              >
+                {status === "submitting" ? "Sending..." : "Send Message"}
+              </button>
+            </motion.div>
 
-            {status === "success" && (
-              <p className="text-center text-sm font-body text-green-700 bg-green-50 rounded-xl py-3 px-4">
-                Thank you! Your message has been sent. We&apos;ll be in touch soon.
-              </p>
-            )}
+            <AnimatePresence mode="wait">
+              {status === "success" && (
+                <motion.p
+                  key="success"
+                  className="text-center text-sm font-body text-green-700 bg-green-50 rounded-xl py-3 px-4"
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.92 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  Thank you! Your message has been sent. We&apos;ll be in touch soon.
+                </motion.p>
+              )}
 
-            {status === "error" && (
-              <p className="text-center text-sm font-body text-red-700 bg-red-50 rounded-xl py-3 px-4">
-                {errorMessage}
-              </p>
-            )}
-          </form>
+              {status === "error" && (
+                <motion.p
+                  key="error"
+                  className="text-center text-sm font-body text-red-700 bg-red-50 rounded-xl py-3 px-4"
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.92 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  {errorMessage}
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </motion.form>
 
           {/* Contact info */}
-          <div className="flex flex-col justify-center">
+          <motion.div
+            className="flex flex-col justify-center"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <h3 className="font-heading text-2xl font-semibold text-brand-navy mb-4">
               Get in Touch
             </h3>
@@ -183,7 +226,7 @@ export default function Contact() {
                 href="mailto:thecrosswalkmentors@gmail.com"
                 className="flex items-center gap-4 group"
               >
-                <span className="flex-shrink-0 w-11 h-11 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                <span className="flex-shrink-0 w-11 h-11 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold group-hover:bg-brand-gold group-hover:text-white transition-all duration-300 group-hover:scale-110">
                   <FaEnvelope size={18} />
                 </span>
                 <span className="font-body text-brand-slate group-hover:text-brand-navy transition-colors">
@@ -195,7 +238,7 @@ export default function Contact() {
                 href="tel:+19515328010"
                 className="flex items-center gap-4 group"
               >
-                <span className="flex-shrink-0 w-11 h-11 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                <span className="flex-shrink-0 w-11 h-11 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold group-hover:bg-brand-gold group-hover:text-white transition-all duration-300 group-hover:scale-110">
                   <FaPhone size={18} />
                 </span>
                 <span className="font-body text-brand-slate group-hover:text-brand-navy transition-colors">
@@ -209,7 +252,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 group"
               >
-                <span className="flex-shrink-0 w-11 h-11 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                <span className="flex-shrink-0 w-11 h-11 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold group-hover:bg-brand-gold group-hover:text-white transition-all duration-300 group-hover:scale-110">
                   <FaInstagram size={18} />
                 </span>
                 <span className="font-body text-brand-slate group-hover:text-brand-navy transition-colors">
@@ -217,7 +260,7 @@ export default function Contact() {
                 </span>
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

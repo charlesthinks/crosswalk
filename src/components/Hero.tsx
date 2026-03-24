@@ -1,5 +1,13 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "motion/react";
 import { BASE_PATH } from "@/lib/config";
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+};
 
 export default function Hero() {
   return (
@@ -16,18 +24,39 @@ export default function Hero() {
       <div className="absolute inset-0 bg-brand-navy/70" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
-        <p className="font-body text-brand-gold text-sm sm:text-base font-semibold uppercase tracking-[0.25em] mb-6">
+      <motion.div
+        className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center"
+        initial="initial"
+        animate="animate"
+        transition={{ staggerChildren: 0.15 }}
+      >
+        <motion.p
+          className="font-body text-brand-gold text-sm sm:text-base font-semibold uppercase tracking-[0.25em] mb-6"
+          variants={fadeInUp}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           A 10-Week Hybrid Mentor Journey
-        </p>
-        <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold !text-white tracking-tighter leading-tight mb-6">
+        </motion.p>
+        <motion.h1
+          className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold !text-white tracking-tighter leading-tight mb-6"
+          variants={fadeInUp}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           Guiding Young Men Toward Faith &amp; Mental Wellness
-        </h1>
-        <p className="font-body text-white/80 text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+        </motion.h1>
+        <motion.p
+          className="font-body text-white/80 text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl mx-auto"
+          variants={fadeInUp}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           Where personal growth intersects with spiritual development and mental health.
           A journey designed to empower you with resilience, clarity, and a deep sense of purpose.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        </motion.p>
+        <motion.div
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          variants={fadeInUp}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <a
             href="#contact"
             className="bg-brand-gold hover:bg-brand-gold-light text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors duration-300 w-full sm:w-auto"
@@ -40,8 +69,8 @@ export default function Hero() {
           >
             Learn More
           </a>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

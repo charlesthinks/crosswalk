@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { FaCheck } from "react-icons/fa";
+import { motion } from "motion/react";
 
 const highlights = [
   "Weekly mentor-led sessions",
@@ -10,23 +13,39 @@ const highlights = [
   "Resilience & self-esteem building",
 ];
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export default function About() {
   return (
     <section id="about" className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image */}
-          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+          <motion.div
+            className="relative aspect-[4/3] rounded-2xl overflow-hidden"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <Image
               src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80"
               alt="Young men in a mentoring discussion circle"
               fill
               className="object-cover"
             />
-          </div>
+          </motion.div>
 
           {/* Content */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <p className="font-body text-brand-gold text-sm font-semibold uppercase tracking-[0.25em] mb-4">
               About the Journey
             </p>
@@ -45,17 +64,28 @@ export default function About() {
               both inner strength and a connection to something greater than themselves.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ staggerChildren: 0.08, delayChildren: 0.2 }}
+            >
               {highlights.map((item) => (
-                <div key={item} className="flex items-center gap-3">
+                <motion.div
+                  key={item}
+                  className="flex items-center gap-3"
+                  variants={fadeInUp}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                >
                   <span className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-gold/10 flex items-center justify-center">
                     <FaCheck className="text-brand-gold text-xs" />
                   </span>
                   <span className="font-body text-brand-slate text-sm">{item}</span>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

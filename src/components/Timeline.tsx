@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 const weeks = [
   {
@@ -225,13 +226,24 @@ const weeks = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.92 },
+  visible: { opacity: 1, scale: 1 },
+};
+
 export default function Timeline() {
   const [activeWeek, setActiveWeek] = useState(0);
 
   return (
     <section id="journey" className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <p className="font-body text-brand-gold text-sm font-semibold uppercase tracking-[0.25em] mb-4">
             The 10-Week Journey
           </p>
@@ -243,12 +255,12 @@ export default function Timeline() {
             foundation of faith to help you grow with resilience, clarity, and
             purpose.
           </p>
-        </div>
+        </motion.div>
 
         {/* Week selector pills */}
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {weeks.map((w, i) => (
-            <button
+            <motion.button
               key={w.week}
               onClick={() => setActiveWeek(i)}
               className={`
@@ -259,47 +271,65 @@ export default function Timeline() {
                     : "bg-brand-cream text-brand-slate hover:bg-brand-navy/10"
                 }
               `}
+              whileTap={{ scale: 0.95 }}
             >
               Week {w.week}
-            </button>
+            </motion.button>
           ))}
         </div>
 
         {/* Active week content */}
         <div className="max-w-4xl mx-auto">
-          {/* Timeline line + dot */}
-          <div className="relative pl-8 md:pl-12 border-l-2 border-brand-gold/30">
-            <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-brand-gold ring-4 ring-brand-gold/20" />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeWeek}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              {/* Timeline line + dot */}
+              <div className="relative pl-8 md:pl-12 border-l-2 border-brand-gold/30">
+                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-brand-gold ring-4 ring-brand-gold/20" />
 
-            <div className="mb-2">
-              <span className="inline-block font-body text-xs font-semibold uppercase tracking-widest text-brand-gold bg-brand-gold/10 px-3 py-1 rounded-full">
-                Week {weeks[activeWeek].week}
-              </span>
-            </div>
-
-            <h3 className="font-heading text-2xl md:text-3xl font-bold text-brand-navy mb-2">
-              {weeks[activeWeek].title}
-            </h3>
-            <p className="font-body text-brand-slate text-lg mb-8">
-              {weeks[activeWeek].subtitle}
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {weeks[activeWeek].topics.map((topic) => (
-                <div
-                  key={topic.name}
-                  className="bg-brand-cream rounded-2xl p-6 hover:shadow-md transition-shadow duration-300"
-                >
-                  <h4 className="font-heading text-base font-bold text-brand-navy mb-2">
-                    {topic.name}
-                  </h4>
-                  <p className="font-body text-brand-slate text-sm leading-relaxed">
-                    {topic.description}
-                  </p>
+                <div className="mb-2">
+                  <span className="inline-block font-body text-xs font-semibold uppercase tracking-widest text-brand-gold bg-brand-gold/10 px-3 py-1 rounded-full">
+                    Week {weeks[activeWeek].week}
+                  </span>
                 </div>
-              ))}
-            </div>
-          </div>
+
+                <h3 className="font-heading text-2xl md:text-3xl font-bold text-brand-navy mb-2">
+                  {weeks[activeWeek].title}
+                </h3>
+                <p className="font-body text-brand-slate text-lg mb-8">
+                  {weeks[activeWeek].subtitle}
+                </p>
+
+                <motion.div
+                  className="grid grid-cols-1 md:grid-cols-3 gap-5"
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ staggerChildren: 0.08, delayChildren: 0.1 }}
+                >
+                  {weeks[activeWeek].topics.map((topic) => (
+                    <motion.div
+                      key={topic.name}
+                      className="bg-brand-cream rounded-2xl p-6 hover:shadow-md transition-shadow duration-300"
+                      variants={cardVariants}
+                      transition={{ duration: 0.35, ease: "easeOut" }}
+                    >
+                      <h4 className="font-heading text-base font-bold text-brand-navy mb-2">
+                        {topic.name}
+                      </h4>
+                      <p className="font-body text-brand-slate text-sm leading-relaxed">
+                        {topic.description}
+                      </p>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Progress indicator */}
@@ -313,9 +343,10 @@ export default function Timeline() {
             </span>
           </div>
           <div className="h-1.5 bg-brand-cream rounded-full overflow-hidden">
-            <div
-              className="h-full bg-brand-gold rounded-full transition-all duration-500 ease-out"
-              style={{ width: `${weeks[activeWeek].week * 10}%` }}
+            <motion.div
+              className="h-full bg-brand-gold rounded-full"
+              animate={{ width: `${weeks[activeWeek].week * 10}%` }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             />
           </div>
         </div>
