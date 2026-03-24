@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
+import { BASE_PATH } from "@/lib/config";
 
 export default function Founder() {
   return (
@@ -60,7 +61,7 @@ export default function Founder() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
+              src={`${BASE_PATH}/images/img8.JPEG`}
               alt="Bruce Hooks, founder of Crosswalk"
               fill
               className="object-cover"

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { FaCheck } from "react-icons/fa";
 import { motion } from "motion/react";
+import { BASE_PATH } from "@/lib/config";
 
 const highlights = [
   "Weekly mentor-led sessions",
@@ -32,7 +33,7 @@ export default function About() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80"
+              src={`${BASE_PATH}/images/img1.jpeg`}
               alt="Young men in a mentoring discussion circle"
               fill
               className="object-cover"
