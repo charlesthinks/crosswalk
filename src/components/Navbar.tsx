@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import Image from "next/image";
+import { BASE_PATH } from "@/lib/config";
 
 const navLinks = [
   { label: "Values", href: "#values" },
@@ -36,7 +37,7 @@ export default function Navbar() {
               }`}
           >
             <Image
-              src="/images/HCW.png"
+              src={`${BASE_PATH}/images/HCW.png`}
               alt="Young men walking together outdoors"
               width={40}
               height={40}

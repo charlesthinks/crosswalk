@@ -1,48 +1,49 @@
 import Image from "next/image";
+import { BASE_PATH } from "@/lib/config";
 
 const images = [
   {
-    src: "/images/img1.jpeg",
+    src: `${BASE_PATH}/images/img1.jpeg`,
     alt: "Community gathering and fellowship",
     className: "col-span-1 row-span-1",
   },
   {
-    src: "/images/img2.JPEG",
+    src: `${BASE_PATH}/images/img2.JPEG`,
     alt: "Mentoring session with young men",
     className: "col-span-1 row-span-1",
   },
   {
-    src: "/images/img3.JPEG",
+    src: `${BASE_PATH}/images/img3.JPEG`,
     alt: "Group discussion and personal growth",
     className: "col-span-1 row-span-1",
   },
   {
-    src: "/images/img4.JPG",
+    src: `${BASE_PATH}/images/img4.JPG`,
     alt: "Brotherhood and community support",
     className: "col-span-1 row-span-1",
   },
   {
-    src: "/images/img5.JPEG",
+    src: `${BASE_PATH}/images/img5.JPEG`,
     alt: "Faith in action and spiritual connection",
     className: "col-span-1 row-span-1 hidden sm:block",
   },
   {
-    src: "/images/img6.JPEG",
+    src: `${BASE_PATH}/images/img6.JPEG`,
     alt: "Young men building connections together",
     className: "col-span-1 row-span-1 hidden sm:block",
   },
   {
-    src: "/images/img7.JPEG",
+    src: `${BASE_PATH}/images/img7.JPEG`,
     alt: "Mentorship and personal growth moments",
     className: "col-span-1 row-span-1 hidden lg:block",
   },
   {
-    src: "/images/img8.JPEG",
+    src: `${BASE_PATH}/images/img8.JPEG`,
     alt: "Crosswalk community experience",
     className: "col-span-1 row-span-1 hidden lg:block",
   },
   {
-    src: "/images/img9.JPEG",
+    src: `${BASE_PATH}/images/img9.JPEG`,
     alt: "The journey towards faith and wellness",
     className: "col-span-1 row-span-1 hidden lg:block",
   },

@@ -1,11 +1,12 @@
 import Image from "next/image";
+import { BASE_PATH } from "@/lib/config";
 
 export default function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center">
       {/* Background image */}
       <Image
-        src="/images/hero_bg.png"
+        src={`${BASE_PATH}/images/hero_bg.png`}
         alt="Young men walking together outdoors"
         fill
         className="object-cover"

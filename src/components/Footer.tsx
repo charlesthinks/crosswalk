@@ -1,5 +1,6 @@
 import { FaEnvelope, FaInstagram, FaPhone } from "react-icons/fa";
 import Image from "next/image";
+import { BASE_PATH } from "@/lib/config";
 
 export default function Footer() {
   return (
@@ -9,7 +10,7 @@ export default function Footer() {
           <div className="text-center md:text-left">
             <div className="flex flex-row items-center gap-x-3 mb-4">
               <Image
-                src="/images/HCW.png"
+                src={`${BASE_PATH}/images/HCW.png`}
                 alt="Young men walking together outdoors"
                 width={32}
                 height={32}
