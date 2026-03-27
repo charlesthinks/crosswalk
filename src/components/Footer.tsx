@@ -2,6 +2,13 @@ import { FaEnvelope, FaInstagram, FaPhone } from "react-icons/fa";
 import Image from "next/image";
 import { BASE_PATH } from "@/lib/config";
 
+const footerNavLinks = [
+  { label: "Values", href: "#values" },
+  { label: "About", href: "#about" },
+  { label: "Founder", href: "#founder" },
+  { label: "Contact", href: "#contact" },
+];
+
 export default function Footer() {
   return (
     <footer className="bg-brand-charcoal py-12">
@@ -29,6 +36,18 @@ export default function Footer() {
               </p>
             </div>
           </div>
+
+          <nav className="flex flex-row md:flex-col items-center md:items-start gap-2">
+            {footerNavLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="font-body text-sm text-white/50 hover:text-brand-gold transition-colors duration-300"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
 
           <div className="flex items-center gap-4">
             <a
