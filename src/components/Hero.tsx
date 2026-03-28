@@ -59,13 +59,13 @@ export default function Hero() {
         >
           <a
             href="#contact"
-            className="bg-brand-gold hover:bg-brand-gold-light text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors duration-300 w-full sm:w-auto"
+            className="bg-brand-gold hover:bg-brand-gold-light text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors duration-300 w-full sm:w-auto text-center"
           >
             Get Started
           </a>
           <a
             href="#about"
-            className="border-2 border-white/40 hover:border-white text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors duration-300 w-full sm:w-auto"
+            className="border-2 border-white/40 hover:border-white text-white font-semibold px-8 py-3.5 rounded-full text-base transition-colors duration-300 w-full sm:w-auto text-center"
           >
             Learn More
           </a>

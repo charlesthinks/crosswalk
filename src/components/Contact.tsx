@@ -3,6 +3,13 @@
 import { useState } from "react";
 import { FaEnvelope, FaPhone, FaInstagram } from "react-icons/fa";
 import { motion, AnimatePresence } from "motion/react";
+import { Button } from "@heroui/react/button";
+import { TextField } from "@heroui/react/textfield";
+import { TextArea } from "@heroui/react/textarea";
+import { Input } from "@heroui/react/input";
+import { Label } from "@heroui/react/label";
+import { Select } from "@heroui/react/select";
+import { ListBox } from "@heroui/react/list-box";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
@@ -14,6 +21,7 @@ const fadeInUp = {
 export default function Contact() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [inquiryType, setInquiryType] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -60,6 +68,7 @@ export default function Contact() {
                   Email: email,
                   Message: message,
                   ...(phone ? { Phone: phone } : {}),
+                  ...(inquiryType ? { "Inquiry Type": inquiryType } : {}),
                 },
               },
             ],
@@ -73,6 +82,7 @@ export default function Contact() {
       }
 
       setStatus("success");
+      setInquiryType("");
       form.reset();
     } catch (err) {
       setStatus("error");
@@ -111,68 +121,94 @@ export default function Contact() {
             transition={{ staggerChildren: 0.08 }}
           >
             <motion.div variants={fadeInUp} transition={{ duration: 0.4, ease: "easeOut" }}>
-              <label htmlFor="name" className="block font-body text-sm font-medium text-brand-navy mb-1.5">
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px"
-                placeholder="Your name"
-              />
+              <TextField name="name" isRequired className="w-full">
+                <Label className="block font-body text-sm font-medium text-brand-navy mb-1.5">
+                  Full Name
+                </Label>
+                <Input
+                  placeholder="Your name"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px"
+                />
+              </TextField>
             </motion.div>
 
             <motion.div variants={fadeInUp} transition={{ duration: 0.4, ease: "easeOut" }}>
-              <label htmlFor="email" className="block font-body text-sm font-medium text-brand-navy mb-1.5">
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px"
-                placeholder="you@example.com"
-              />
+              <TextField name="email" type="email" isRequired className="w-full">
+                <Label className="block font-body text-sm font-medium text-brand-navy mb-1.5">
+                  Email Address
+                </Label>
+                <Input
+                  placeholder="you@example.com"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px"
+                />
+              </TextField>
             </motion.div>
 
             <motion.div variants={fadeInUp} transition={{ duration: 0.4, ease: "easeOut" }}>
-              <label htmlFor="phone" className="block font-body text-sm font-medium text-brand-navy mb-1.5">
-                Phone <span className="text-brand-slate/50">(optional)</span>
-              </label>
-              <input
-                type="tel"
-                id="Phone"
-                name="Phone"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px"
-                placeholder="(555) 123-4567"
-              />
+              <TextField name="Phone" className="w-full">
+                <Label className="block font-body text-sm font-medium text-brand-navy mb-1.5">
+                  Phone <span className="text-brand-slate/50">(optional)</span>
+                </Label>
+                <Input
+                  type="tel"
+                  placeholder="(555) 123-4567"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px"
+                />
+              </TextField>
             </motion.div>
 
             <motion.div variants={fadeInUp} transition={{ duration: 0.4, ease: "easeOut" }}>
-              <label htmlFor="message" className="block font-body text-sm font-medium text-brand-navy mb-1.5">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px resize-none"
-                placeholder="Tell us about yourself and what you're looking for..."
-              />
+              <Label className="block font-body text-sm font-medium text-brand-navy mb-1.5">
+                How can we help?
+              </Label>
+              <Select
+                name="inquiryType"
+                placeholder="Select one"
+                className="w-full"
+                selectedKey={inquiryType || null}
+                onSelectionChange={(key) => setInquiryType(key as string)}
+              >
+                <Select.Trigger className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px flex items-center justify-between">
+                  <Select.Value />
+                  <Select.Indicator />
+                </Select.Trigger>
+                <Select.Popover className="bg-white rounded-xl border border-gray-200 shadow-lg z-50 overflow-hidden">
+                  <ListBox className="p-1">
+                    <ListBox.Item id="Program" className="px-4 py-2.5 font-body text-sm text-brand-slate rounded-lg cursor-pointer hover:bg-brand-gold/10 hover:text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-colors">
+                      I&apos;m interested in the program
+                    </ListBox.Item>
+                    <ListBox.Item id="Business" className="px-4 py-2.5 font-body text-sm text-brand-slate rounded-lg cursor-pointer hover:bg-brand-gold/10 hover:text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-colors">
+                      Business or partnership inquiry
+                    </ListBox.Item>
+                    <ListBox.Item id="General" className="px-4 py-2.5 font-body text-sm text-brand-slate rounded-lg cursor-pointer hover:bg-brand-gold/10 hover:text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-colors">
+                      General question
+                    </ListBox.Item>
+                  </ListBox>
+                </Select.Popover>
+              </Select>
             </motion.div>
 
             <motion.div variants={fadeInUp} transition={{ duration: 0.4, ease: "easeOut" }}>
-              <button
+              <TextField name="message" isRequired className="w-full">
+                <Label className="block font-body text-sm font-medium text-brand-navy mb-1.5">
+                  Message
+                </Label>
+                <TextArea
+                  rows={4}
+                  placeholder="Tell us about yourself and what you're looking for..."
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white font-body text-brand-slate text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold transition-all focus:-translate-y-px resize-none"
+                />
+              </TextField>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} transition={{ duration: 0.4, ease: "easeOut" }}>
+              <Button
                 type="submit"
-                disabled={status === "submitting"}
+                isDisabled={status === "submitting"}
                 className="w-full bg-brand-gold hover:bg-brand-gold-light disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3.5 rounded-full text-base transition-all duration-300 hover:shadow-[0_0_20px_rgba(200,151,62,0.3)]"
               >
                 {status === "submitting" ? "Sending..." : "Send Message"}
-              </button>
+              </Button>
             </motion.div>
 
             <AnimatePresence mode="wait">
