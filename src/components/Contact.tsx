@@ -259,14 +259,14 @@ export default function Contact() {
 
             <div className="space-y-5">
               <a
-                href="mailto:d.hooks@crosswalkwellness.com"
+                href="mailto:bhooks@crosswalkwellness.com"
                 className="flex items-center gap-4 group"
               >
                 <span className="flex-shrink-0 w-11 h-11 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold group-hover:bg-brand-gold group-hover:text-white transition-all duration-300 group-hover:scale-110">
                   <FaEnvelope size={18} />
                 </span>
                 <span className="font-body text-brand-slate group-hover:text-brand-navy transition-colors">
-                  d.hooks@crosswalkwellness.com
+                  bhooks@crosswalkwellness.com
                 </span>
               </a>
 
